@@ -1,0 +1,11 @@
+{
+	"name" : "eelly/oauth2-client",
+	"description" : "oauth2 client",
+	"type" : "library",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "hehui",
+			"email" : "runphp@qq.com"
+		}
+	]
+}
