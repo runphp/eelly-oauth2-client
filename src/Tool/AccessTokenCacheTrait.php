@@ -13,9 +13,7 @@ namespace Eelly\OAuth2\Client\Tool;
 use Phalcon\Cache\BackendInterface as CacheInterface;
 
 /**
- *
  * @author hehui<hehui@eelly.net>
- *
  */
 trait AccessTokenCacheTrait
 {
