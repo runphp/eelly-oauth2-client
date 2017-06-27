@@ -37,7 +37,7 @@ trait AccessTokenCacheTrait
         if (!is_object($this->cache)) {
             return parent::getAccessToken($grant, $options);
         }
-        $keyName = __CLASS__.':'.__FUNCTION__.':'.$grant;
+        $keyName = $this->keyName(__CLASS__, __METHOD__, [$grant, $options]);
         if (!$this->cache->exists($keyName)) {
             /**
              * @var \League\OAuth2\Client\Token\AccessToken $accessToken
@@ -49,5 +49,36 @@ trait AccessTokenCacheTrait
         }
 
         return $accessToken;
+    }
+
+    /**
+     * 缓存key.
+     *
+     * @param string $class
+     * @param string $method
+     * @param array  $params
+     *
+     * @return string
+     */
+    private function keyName($class, $method, array $params)
+    {
+        return sprintf('%s:%s:%s', $class, $method, $this->createKeyWithArray($params));
+    }
+
+    private function createKeyWithArray(array $parameters)
+    {
+        $uniqueKey = [];
+
+        foreach ($parameters as $key => $value) {
+            if (is_scalar($value)) {
+                $uniqueKey[] = $key.':'.$value;
+            } elseif (is_array($value)) {
+                $uniqueKey[] = $key.':['.$this->createKeyWithArray($value).']';
+            } else {
+                throw new \InvalidArgumentException('can not use cache annotation', 500);
+            }
+        }
+
+        return implode(',', $uniqueKey);
     }
 }
