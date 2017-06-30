@@ -35,12 +35,12 @@ class EasemobProviderTest extends TestCase
     public function setUp(): void
     {
         $options = [
-            'clientId' => 'YXA6UR5jYHMdEeWVfi1kLYliWw',
+            'clientId'     => 'YXA6UR5jYHMdEeWVfi1kLYliWw',
             'clientSecret' => 'YXA61KlUhrvYXNTT_aymCx0bPDfoQMs',
-            'orgName' => 'www-eelly-com',
-            'appName' => 'buyerdevelopment',
+            'orgName'      => 'www-eelly-com',
+            'appName'      => 'buyerdevelopment',
             'signResponse' => 'syn32i94453c7a5', // 输出签名
-            'signRequest' => 'knbxouvb0x0xrdc',  // 输入签名
+            'signRequest'  => 'knbxouvb0x0xrdc',  // 输入签名
         ];
         $this->provider = new EasemobProvider($options);
     }
@@ -61,7 +61,7 @@ class EasemobProviderTest extends TestCase
             ],
             'options' => [
                 'connections' => [
-                    'tcp' => 'Predis\Connection\PhpiredisStreamConnection',  // PHP stream resources
+                    'tcp'  => 'Predis\Connection\PhpiredisStreamConnection',  // PHP stream resources
                     'unix' => 'Predis\Connection\PhpiredisSocketConnection',  // ext-socket resources
                 ],
                 'cluster' => 'redis',
