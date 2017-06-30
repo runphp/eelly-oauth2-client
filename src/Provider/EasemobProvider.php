@@ -89,7 +89,6 @@ class EasemobProvider extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return null;
     }
 
     /**
@@ -115,7 +114,6 @@ class EasemobProvider extends AbstractProvider
      */
     protected function getDefaultScopes()
     {
-        return null;
     }
 
     /**
