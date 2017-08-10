@@ -14,6 +14,7 @@ namespace Eelly\OAuth2\Client\Provider;
 
 use Eelly\OAuth2\Client\Tool\AccessTokenCacheTrait;
 use League\OAuth2\Client\Provider\GenericProvider;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Eelly Provider.
@@ -23,4 +24,19 @@ use League\OAuth2\Client\Provider\GenericProvider;
 class EellyProvider extends GenericProvider
 {
     use AccessTokenCacheTrait;
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return array
+     */
+    protected function parseResponse(ResponseInterface $response)
+    {
+        if (500 == $response->getStatusCode()) {
+            $arr = parent::parseResponse($response);
+            throw new \RuntimeException($arr['error']);
+        } else {
+            return parent::parseResponse($response);
+        }
+    }
 }
