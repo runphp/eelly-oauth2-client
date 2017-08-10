@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of eelly package.
  *
@@ -87,7 +88,7 @@ class EasemobProvider extends AbstractProvider
      *
      * @see \League\OAuth2\Client\Provider\AbstractProvider::getResourceOwnerDetailsUrl()
      */
-    public function getResourceOwnerDetailsUrl(AccessToken $token)
+    public function getResourceOwnerDetailsUrl(AccessToken $token): void
     {
     }
 
@@ -112,7 +113,7 @@ class EasemobProvider extends AbstractProvider
      *
      * @see \League\OAuth2\Client\Provider\AbstractProvider::getDefaultScopes()
      */
-    protected function getDefaultScopes()
+    protected function getDefaultScopes(): void
     {
     }
 
