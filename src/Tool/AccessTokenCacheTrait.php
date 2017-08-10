@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of eelly package.
  *
@@ -37,7 +38,7 @@ trait AccessTokenCacheTrait
         if (!is_object($this->cache)) {
             return parent::getAccessToken($grant, $options);
         }
-        $keyName = $this->keyName(__CLASS__, __METHOD__, [$grant, $options]);
+        $keyName = $this->keyName(__CLASS__, __FUNCTION__, [$grant, $options]);
         if (!$this->cache->exists($keyName)) {
             /**
              * @var \League\OAuth2\Client\Token\AccessToken
