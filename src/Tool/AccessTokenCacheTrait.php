@@ -40,7 +40,12 @@ trait AccessTokenCacheTrait
         if (!is_object($this->cache)) {
             return parent::getAccessToken($grant, $options);
         }
-        $keyName = $this->keyName(__CLASS__, __FUNCTION__, [$grant, $options]);
+        $params = [
+            'client_id'     => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'redirect_uri'  => $this->redirectUri,
+        ];
+        $keyName = $this->keyName(__CLASS__, __FUNCTION__, [$grant, $options, md5(json_encode($params))]);
         if (!$this->cache->exists($keyName)) {
             /**
              * @var \League\OAuth2\Client\Token\AccessToken

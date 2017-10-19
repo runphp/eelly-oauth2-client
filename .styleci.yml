@@ -1,0 +1,16 @@
+preset: recommended
+
+risky: true
+
+enabled:
+  - ordered_class_elements
+  - declare_strict_types
+  - no_empty_comment
+  - no_null_property_initialization
+  
+disabled:
+  - phpdoc_var_without_name
+
+finder:
+  name:
+    - "*.php"
