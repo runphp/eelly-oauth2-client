@@ -35,6 +35,7 @@ class EellyProvider extends GenericProvider
     {
         if (500 == $response->getStatusCode()) {
             $arr = parent::parseResponse($response);
+
             throw new \RuntimeException($arr['error']);
         } else {
             return parent::parseResponse($response);
