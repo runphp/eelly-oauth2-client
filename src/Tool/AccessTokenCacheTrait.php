@@ -41,14 +41,10 @@ trait AccessTokenCacheTrait
             return parent::getAccessToken($grant, $options);
         }
         $keyName = $this->keyName(__CLASS__, __FUNCTION__, [$grant, $options, $this->clientId]);
-        if (!$this->cache->exists($keyName)) {
-            /**
-             * @var \League\OAuth2\Client\Token\AccessToken
-             */
+        $accessToken = $this->cache->get($keyName);
+        if (false === $accessToken || $accessToken->hasExpired()) {
             $accessToken = parent::getAccessToken($grant, $options);
             $this->cache->save($keyName, $accessToken, $accessToken->getExpires() - time());
-        } else {
-            $accessToken = $this->cache->get($keyName);
         }
 
         return $accessToken;
