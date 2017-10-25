@@ -40,7 +40,12 @@ trait AccessTokenCacheTrait
         if (!is_object($this->cache)) {
             return parent::getAccessToken($grant, $options);
         }
-        $keyName = $this->keyName(__CLASS__, __FUNCTION__, [$grant, $options, $this->clientId]);
+        $params = [$grant, $options, $this->clientId];
+        $key = getenv('APPLICATION_KEY');
+        if (false != $key) {
+            array_push($params, $key);
+        }
+        $keyName = $this->keyName(__CLASS__, __FUNCTION__, $params);
         $accessToken = $this->cache->get($keyName);
         if (false === $accessToken || $accessToken->hasExpired()) {
             $accessToken = parent::getAccessToken($grant, $options);
