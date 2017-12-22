@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Client\Provider;
+namespace Shadon\OAuth2\Client\Provider;
 
-use Eelly\OAuth2\Client\Tool\AccessTokenCacheTrait;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericResourceOwner;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
+use Shadon\OAuth2\Client\Tool\AccessTokenCacheTrait;
 
 /**
  * Easemob provider.
@@ -101,7 +101,7 @@ class EasemobProvider extends AbstractProvider
     {
         $options = ['headers' => ['content-type' => 'application/json']];
 
-        if ($this->getAccessTokenMethod() === self::METHOD_POST) {
+        if (self::METHOD_POST === $this->getAccessTokenMethod()) {
             $options['body'] = json_encode($params);
         }
 

@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Client\Provider;
+namespace Shadon\OAuth2\Client\Provider;
 
-use Eelly\OAuth2\Client\Tool\AccessTokenCacheTrait;
 use League\OAuth2\Client\Provider\GenericProvider;
 use Psr\Http\Message\ResponseInterface;
+use Shadon\OAuth2\Client\Tool\AccessTokenCacheTrait;
 
 /**
  * Eelly Provider.

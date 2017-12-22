@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Client\Provider;
+namespace Shadon\OAuth2\Client\Provider;
 
-use Eelly\Cache\Backend\Predis;
 use League\OAuth2\Client\Token\AccessToken;
 use Phalcon\Cache\Frontend\Igbinary;
 use PHPUnit\Framework\TestCase;
+use Shadon\Cache\Backend\Predis;
 
 /**
  * @author hehui<hehui@eelly.net>
