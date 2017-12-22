@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Eelly\OAuth2\Client\Tool;
+namespace Shadon\OAuth2\Client\Tool;
 
 use Phalcon\Cache\BackendInterface as CacheInterface;
 

@@ -1,12 +1,12 @@
 {
-	"name": "eelly/oauth2-client",
+	"name": "shadon/oauth2-client",
 	"description": "oauth2 client",
 	"type": "library",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Eelly",
-			"homepage": "https://www.eelly.com"
+			"name": "Shadon",
+			"homepage": "http://www.shadon.org"
 		}
 	],
 	"require": {
@@ -15,7 +15,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Eelly\\OAuth2\\Client\\":"src"
+			"Shadon\\OAuth2\\Client\\":"src"
 		}
 	}
 }
