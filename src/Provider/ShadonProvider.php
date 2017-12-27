@@ -18,11 +18,11 @@ use Psr\Http\Message\ResponseInterface;
 use Shadon\OAuth2\Client\Tool\AccessTokenCacheTrait;
 
 /**
- * Eelly Provider.
+ * Shadon Provider.
  *
  * @author hehui<hehui@eelly.net>
  */
-class EellyProvider extends GenericProvider
+class ShadonProvider extends GenericProvider
 {
     use AccessTokenCacheTrait;
 
