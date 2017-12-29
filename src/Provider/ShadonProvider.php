@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Shadon\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\GenericProvider;
-use Psr\Http\Message\ResponseInterface;
 use Shadon\OAuth2\Client\Tool\AccessTokenCacheTrait;
 
 /**
@@ -25,20 +24,4 @@ use Shadon\OAuth2\Client\Tool\AccessTokenCacheTrait;
 class ShadonProvider extends GenericProvider
 {
     use AccessTokenCacheTrait;
-
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return array
-     */
-    protected function parseResponse(ResponseInterface $response)
-    {
-        if (500 == $response->getStatusCode()) {
-            $arr = parent::parseResponse($response);
-
-            throw new \RuntimeException($arr['error']);
-        } else {
-            return parent::parseResponse($response);
-        }
-    }
 }
