@@ -31,10 +31,11 @@ $rules = [
     'phpdoc_order'                               => true,
     'phpdoc_no_alias_tag'                        => [],
     'phpdoc_var_without_name'                    => false,
+    'increment_style'                            => ['style' => 'post'],
 ];
 
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules($rules)
     ->setFinder($finder)
-    ->setCacheFile(sys_get_temp_dir().'/.php_cs.cache');
+    ->setCacheFile(sys_get_temp_dir().'/'.md5(__FILE__).'.php_cs.cache');
