@@ -47,7 +47,7 @@ trait AccessTokenCacheTrait
         }
         $keyName = $this->keyName(__CLASS__, __FUNCTION__, $params);
         $accessToken = $this->cache->get($keyName);
-        if (false === $accessToken || $accessToken->hasExpired()) {
+        if (empty($accessToken) || $accessToken->hasExpired()) {
             $accessToken = parent::getAccessToken($grant, $options);
             $this->cache->save($keyName, $accessToken, $accessToken->getExpires() - time() - 10 /* 提前10秒过期 */);
         }
