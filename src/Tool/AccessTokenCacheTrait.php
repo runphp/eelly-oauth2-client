@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Shadon\OAuth2\Client\Tool;
 
+use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
 use Phalcon\Cache\BackendInterface as CacheInterface;
 
 /**
@@ -37,7 +38,7 @@ trait AccessTokenCacheTrait
 
     public function getAccessToken($grant, array $options = [])
     {
-        if (!is_object($this->cache)) {
+        if (!\is_object($this->cache)) {
             return parent::getAccessToken($grant, $options);
         }
         $params = [$grant, $options, $this->clientId];
@@ -48,11 +49,24 @@ trait AccessTokenCacheTrait
         $keyName = $this->keyName(__CLASS__, __FUNCTION__, $params);
         $accessToken = $this->cache->get($keyName);
         if (empty($accessToken) || $accessToken->hasExpired()) {
-            $accessToken = parent::getAccessToken($grant, $options);
+            try {
+                $accessToken = parent::getAccessToken($grant, $options);
+            } catch (InvalidGrantException $e) {
+                $accessToken = $this->getCustomAccessToken($grant, $options);
+            }
             $this->cache->save($keyName, $accessToken, $accessToken->getExpires() - time() - 10 /* 提前10秒过期 */);
         }
 
         return $accessToken;
+    }
+
+    private function getCustomAccessToken($grant, array $options = [])
+    {
+        $class = str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $grant)));
+        $class = 'Shadon\\OAuth2\\Client\\Grant\\'.$class;
+        $this->grantFactory->setGrant($grant, new $class());
+
+        return parent::getAccessToken($grant, $options);
     }
 
     /**
@@ -76,7 +90,7 @@ trait AccessTokenCacheTrait
         foreach ($parameters as $key => $value) {
             if (is_scalar($value)) {
                 $uniqueKey[] = $key.':'.$value;
-            } elseif (is_array($value)) {
+            } elseif (\is_array($value)) {
                 $uniqueKey[] = $key.':['.$this->createKeyWithArray($value).']';
             } else {
                 throw new \InvalidArgumentException('can not use cache annotation', 500);
