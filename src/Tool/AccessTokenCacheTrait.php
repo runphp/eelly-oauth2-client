@@ -38,7 +38,7 @@ trait AccessTokenCacheTrait
 
     public function getAccessToken($grant, array $options = [])
     {
-        if (!\is_object($this->cache)) {
+        if (!\is_object($this->cache) || 'client_credentials' != $grant) {
             return parent::getAccessToken($grant, $options);
         }
         $params = [$grant, $options, $this->clientId];
